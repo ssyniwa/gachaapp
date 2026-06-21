@@ -87,7 +87,7 @@ if not user_history.empty:
             )
             
             st.image(row['url'], width=300) # ここで表示
-            st.write(row['name'])
+            st.write(f"**{row['name']}**")
             
             st.markdown("</div>", unsafe_allow_html=True)
 else:
