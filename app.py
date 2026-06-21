@@ -61,6 +61,17 @@ if selected_char_index and selected_char_index.isdigit():
     
     # 現在のステータスを取得（スプレッドシートから最新を再取得）
     current_data = sheet.row_values(row_num)
+    # 最後に更新された日を管理するための列が必要です（今回は一旦date列を流用するか、最新更新日列を追加してください）
+    # 今回は簡易的に、クエストに行くたびに日付を更新する前提にします
+    last_quest_date = current_data[3] # 4列目が日付と仮定
+    today = str(date.today())
+    
+    # 日付が変わっていたらHP全回復処理
+    if last_quest_date != today and int(current_data[5]) == 0: # HPが0の時または日付経過時
+        sheet.update_cell(row_num, 6, 50) # 全回復（キャラの初期HPなど）
+        sheet.update_cell(row_num, 4, today) # 日付を更新
+        st.info("日付が変わったのでHPが全回復しました！")
+        
     # 行データが [user_id, name, rarity, date, url, hp, exp, stage] の順と仮定
     # ※列の順番は適宜調整してください
     name, hp, exp, stage = current_data[1], int(current_data[5]), int(current_data[6]), int(current_data[7])
