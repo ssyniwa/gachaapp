@@ -58,7 +58,7 @@ if already_drawn:
 else:
     if st.button("ガチャを引く！"):
         result = random.choices(characters, weights=weights, k=1)[0]
-        sheet.append_row([user_id, result['name'], result['rarity'], today, result['url']])
+        sheet.append_row([user_id, result['name'], result['rarity'], today, result['image_url']])
         st.success(f"{result['name']} を引きました！")
         st.rerun()
 
