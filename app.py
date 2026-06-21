@@ -10,7 +10,7 @@ from datetime import date
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 creds = ServiceAccountCredentials.from_json_keyfile_dict(st.secrets["gcp_service_account"], scope)
 client = gspread.authorize(creds)
-sheet = client.open("Gacha_DB").sheet1 # スプレッドシート名
+sheet = client.open("ガチャ").sheet1 # スプレッドシート名
 
 # --- ゲーム設定 ---
 characters = [
