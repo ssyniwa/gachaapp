@@ -94,7 +94,7 @@ st.title(f"プレイヤー: {user_id} さん")
 # ガチャ処理
 if st.button("ガチャを引く！"):
     result = random.choices(characters, weights=weights, k=1)[0]
-    sheet.append_row([user_id, result['name'], result['rarity'], str(date.today()), result['url'],result['hp'],result['exp'],result['stage'])
+    sheet.append_row([user_id, result['name'], result['rarity'], str(date.today()), result['url'],result['hp'],result['exp'],result['stage']])
     st.rerun()
 
 st.subheader("コレクション (タップして育成)")
