@@ -64,12 +64,29 @@ else:
 
 # 図鑑表示
 st.subheader("コレクション")
+# 図鑑表示部分のループを変更
 if not user_history.empty:
     cols = st.columns(3)
     for i, row in user_history.iterrows():
+        # レア度に応じたボーダーカラーの設定
+        rarity_colors = {
+            "Normal": "gray",
+            "Rare": "blue",
+            "Super Rare": "gold"
+        }
+        color = rarity_colors.get(row['rarity'], "black")
+        
         with cols[i % 3]:
-            st.image(row['url'], width=400)
-            st.caption(row['name'])
+            # HTMLで画像にスタイルを適用
+            st.markdown(
+                f"""
+                <div style="border: 3px solid {color}; padding: 5px; border-radius: 10px; text-align: center;">
+                    <img src="{row['image_url']}" width="80">
+                    <p style="font-size: 10px; margin: 0;">{row['name']}</p>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
 else:
     st.write("まだ何も持っていません")
 
