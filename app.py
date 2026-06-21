@@ -70,9 +70,9 @@ if not user_history.empty:
     for i, row in user_history.iterrows():
         # レア度に応じたボーダーカラーの設定
         rarity_colors = {
-            "Normal": "gray",
-            "Rare": "blue",
-            "Super Rare": "gold"
+            "B": "blue",
+            "A": "red",
+            "S": "gold"
         }
         color = rarity_colors.get(row['rarity'], "black")
         
@@ -81,7 +81,7 @@ if not user_history.empty:
             st.markdown(
                 f"""
                 <div style="border: 3px solid {color}; padding: 5px; border-radius: 10px; text-align: center;">
-                    <img src="{row['image_url']}" width="80">
+                    <img src="{row['url']}" width="300">
                     <p style="font-size: 10px; margin: 0;">{row['name']}</p>
                 </div>
                 """,
