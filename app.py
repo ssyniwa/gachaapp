@@ -56,8 +56,8 @@ if selected_char_index:
     # 簡易的な育成ボタン
     if st.button("クエストに向かう！"):
         # 1. 現在のステータス取得（シートから読み込み済みとする）
-        current_hp = int(user_row['hp'])
-        current_exp = int(user_row['exp'])
+        current_hp = int(char_data['hp'])
+        current_exp = int(char_data['exp'])
         
         if current_hp <= 0:
             st.error("体力がありません！休憩してください。")
@@ -68,7 +68,7 @@ if selected_char_index:
             new_exp = current_exp + exp_gain
             
             # 3. 進化判定（経験値が100を超えたら進化）
-            new_stage = int(user_row['stage'])
+            new_stage = int(char_data['stage'])
             if new_exp >= 100:
                 new_stage += 1
                 new_exp = 0 # 進化したら経験値リセット
@@ -77,7 +77,7 @@ if selected_char_index:
                 
             # 4. シート更新
             # 新しい行を追記（または既存行を更新する処理が必要）
-            sheet.append_row([user_id, user_row['name'], new_hp, new_exp, new_stage, scenario])
+            sheet.append_row([user_id, char_data['name'], new_hp, new_exp, new_stage, scenario])
             
             st.write(f"クエスト結果: {scenario}")
             st.write(f"体力: {new_hp}, 経験値: {new_exp}")
