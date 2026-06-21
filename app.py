@@ -68,7 +68,7 @@ if not user_history.empty:
     cols = st.columns(3)
     for i, row in user_history.iterrows():
         with cols[i % 3]:
-            st.image(row['url'], width=80)
+            st.image(row['url'], width=100)
             st.caption(row['name'])
 else:
     st.write("まだ何も持っていません")
