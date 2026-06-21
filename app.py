@@ -45,43 +45,48 @@ df = pd.DataFrame(sheet.get_all_records())
 user_history = df[df['user_id'] == user_id] if not df.empty else pd.DataFrame()
 
 # 2. 育成画面 (selectパラメータがある場合)
-if selected_char_index:
-    st.title("育成画面")
-    idx = int(selected_char_index)
-    char_data = user_history.iloc[idx]
-    
-    st.image(char_data['url'], width=200)
-    st.write(f"キャラ: {char_data['name']}")
-    
-    # 簡易的な育成ボタン
-    if st.button("クエストに向かう！"):
-        # 1. 現在のステータス取得（シートから読み込み済みとする）
-        current_hp = int(char_data['hp'])
-        current_exp = int(char_data['exp'])
+    if selected_char_index and selected_char_index.isdigit():
+        st.title("育成画面")
+        idx = int(selected_char_index)
         
-        if current_hp <= 0:
-            st.error("体力がありません！休憩してください。")
-        else:
-            # 2. クエスト実行
-            scenario, hp_cost, exp_gain = random.choice(quest_scenarios)
-            new_hp = max(0, current_hp - hp_cost)
-            new_exp = current_exp + exp_gain
-            
-            # 3. 進化判定（経験値が100を超えたら進化）
-            new_stage = int(char_data['stage'])
-            if new_exp >= 100:
-                new_stage += 1
-                new_exp = 0 # 進化したら経験値リセット
-                st.balloons()
-                st.success("おめでとう！進化しました！")
+        # DataFrameのインデックス(0始まり)とスプレッドシートの行番号(1始まり+ヘッダー分)を合わせる
+        # sheet.get_all_records() はヘッダーを除いた行をリスト化するため、
+        # スプレッドシートの実際の行番号は idx + 2 になります
+        row_num = idx + 2 
+        
+        # 現在のステータスを取得（スプレッドシートから最新を再取得）
+        current_data = sheet.row_values(row_num)
+        # 行データが [user_id, name, rarity, date, url, hp, exp, stage] の順と仮定
+        # ※列の順番は適宜調整してください
+        name, hp, exp, stage = current_data[1], int(current_data[5]), int(current_data[6]), int(current_data[7])
+
+        st.image(current_data[4], width=200) # URL列
+        st.write(f"キャラ: {name} | HP: {hp} | EXP: {exp} | Stage: {stage}")
+        
+        # クエスト実行ボタン
+        if st.button("クエストに向かう！"):
+            if hp <= 0:
+                st.error("体力がありません！")
+            else:
+                # 報酬計算（例）
+                hp_lost = random.randint(5, 15)
+                exp_gain = random.randint(10, 20)
+                new_hp = max(0, hp - hp_lost)
+                new_exp = exp + exp_gain
                 
-            # 4. シート更新
-            # 新しい行を追記（または既存行を更新する処理が必要）
-            sheet.append_row([user_id, char_data['name'], new_hp, new_exp, new_stage, scenario])
-            
-            st.write(f"クエスト結果: {scenario}")
-            st.write(f"体力: {new_hp}, 経験値: {new_exp}")
-            st.rerun()
+                # 進化判定
+                new_stage = stage
+                if new_exp >= 100:
+                    new_stage += 1
+                    new_exp = 0
+                    st.success("レベルアップ！")
+                
+                # スプレッドシートを更新 (HP, EXP, Stage列を更新)
+                sheet.update_cell(row_num, 6, new_hp)   # HP列
+                sheet.update_cell(row_num, 7, new_exp)  # EXP列
+                sheet.update_cell(row_num, 8, new_stage)# Stage列
+                
+                st.rerun() # 画面を更新して新しい数値を反映
     
     if st.button("戻る"):
         st.query_params.pop("select")
