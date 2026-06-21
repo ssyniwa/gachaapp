@@ -19,7 +19,12 @@ characters = [
     {"name": "アイスボス", "rarity": "S", "url": "images/serina_iceboss.png"}
 ]
 weights = [0.7, 0.25, 0.05]
-
+# --- クエストのパターン ---
+quest_scenarios = [
+    ("森でスライムと遊んだ", 10, 5),    # (感想, 消費HP, 獲得EXP)
+    ("洞窟で宝箱を見つけた", 20, 15),
+    ("強敵と戦った", 30, 30)
+]
 # --- クエリパラメータ取得 ---
 query_params = st.query_params
 user_id = query_params.get("user")
@@ -50,7 +55,33 @@ if selected_char_index:
     
     # 簡易的な育成ボタン
     if st.button("クエストに向かう！"):
-        st.write("クエストに行ってきました！（ここをロジック追加）")
+        # 1. 現在のステータス取得（シートから読み込み済みとする）
+        current_hp = int(user_row['hp'])
+        current_exp = int(user_row['exp'])
+        
+        if current_hp <= 0:
+            st.error("体力がありません！休憩してください。")
+        else:
+            # 2. クエスト実行
+            scenario, hp_cost, exp_gain = random.choice(quest_scenarios)
+            new_hp = max(0, current_hp - hp_cost)
+            new_exp = current_exp + exp_gain
+            
+            # 3. 進化判定（経験値が100を超えたら進化）
+            new_stage = int(user_row['stage'])
+            if new_exp >= 100:
+                new_stage += 1
+                new_exp = 0 # 進化したら経験値リセット
+                st.balloons()
+                st.success("おめでとう！進化しました！")
+                
+            # 4. シート更新
+            # 新しい行を追記（または既存行を更新する処理が必要）
+            sheet.append_row([user_id, user_row['name'], new_hp, new_exp, new_stage, scenario])
+            
+            st.write(f"クエスト結果: {scenario}")
+            st.write(f"体力: {new_hp}, 経験値: {new_exp}")
+            st.rerun()
     
     if st.button("戻る"):
         st.query_params.pop("select")
