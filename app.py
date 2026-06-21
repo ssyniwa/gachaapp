@@ -68,28 +68,11 @@ st.subheader("コレクション")
 if not user_history.empty:
     cols = st.columns(3)
     for i, row in user_history.iterrows():
-        # レア度に応じたボーダーカラーの設定
-        rarity_colors = {
-            "B": "blue",
-            "A": "red",
-            "S": "gold"
-        }
-        color = rarity_colors.get(row['rarity'], "black")
         
         with cols[i % 3]:
-            # 枠線用のdiv開始（HTMLタグ）
-            st.markdown(
-                f"""
-                <div style="border: 3px solid {color}; padding: 10px; border-radius: 30px; 
-                            display: flex; flex-direction: column; align-items: center; background-color: #f9f9f9;">
-                """,
-                unsafe_allow_html=True
-            )
             
             st.image(row['url'], width=300) # ここで表示
-            st.write(f"**{row['name']}**")
-            
-            st.markdown("</div>", unsafe_allow_html=True)
+            st.write(row['name'])
 else:
     st.write("まだ何も持っていません")
 
