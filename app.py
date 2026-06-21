@@ -14,9 +14,9 @@ sheet = client.open("Gacha_DB").sheet1
 
 # --- キャラクター定義 ---
 characters = [
-    {"name": "セリナ", "rarity": "B", "url": "images/serina.png","hp": 10,"exp": 0,"stage": 1},
-    {"name": "ファイアボス", "rarity": "A", "url": "images/serina_fireboss.png","hp": 20,"exp": 0,"stage": 1},
-    {"name": "アイスボス", "rarity": "S", "url": "images/serina_iceboss.png","hp": 30,"exp": 0,"stage": 1}
+    {"name": "アリサ", "rarity": "B", "url": "images/arisa.png","hp": 30,"exp": 0,"stage": 1},
+    {"name": "サユリ", "rarity": "A", "url": "images/sayuri.png","hp": 40,"exp": 0,"stage": 1},
+    {"name": "シャリー", "rarity": "S", "url": "images/shally.png","hp": 50,"exp": 0,"stage": 1}
 ]
 weights = [0.7, 0.25, 0.05]
 # --- クエストのパターン ---
@@ -29,7 +29,12 @@ quest_scenarios = [
 query_params = st.query_params
 user_id = query_params.get("user")
 selected_char_index = query_params.get("select") # 選択中のキャラの行番号
-
+# --- レベルに応じた画像パス生成関数 ---
+def get_image_path(base_url, stage):
+    # base_urlが 'images/serina.png' なら、ディレクトリとファイル名に分解してLvを結合
+    # 例: images/serina_lv1.png
+    base = base_url.rsplit('.', 1)[0] # 拡張子を除去
+    return f"{base}_lv{stage}.png"
 # 1. ログイン処理
 if not user_id:
     st.title("ログイン")
@@ -60,7 +65,9 @@ if selected_char_index and selected_char_index.isdigit():
     # ※列の順番は適宜調整してください
     name, hp, exp, stage = current_data[1], int(current_data[5]), int(current_data[6]), int(current_data[7])
 
-    st.image(current_data[4], width=200) # URL列
+    current_stage = int(current_data[7])
+    display_url = get_image_path(current_data[4], current_stage)
+    st.image(display_url, width=200)# URL列
     st.write(f"キャラ: {name} | HP: {hp} | EXP: {exp} | Stage: {stage}")
     
     # クエスト実行ボタン
@@ -109,6 +116,8 @@ if not user_history.empty:
         if st.button(f"育成する: {row['name']}", key=f"btn_{i}"):
             st.query_params["select"] = i
             st.rerun()
-        st.image(row['url'], width=150)
+        # 図鑑でもレベルに応じた画像を表示
+        display_url = get_image_path(row['url'], row['stage'])
+        st.image(display_url, width=150)
 else:
     st.write("まだ何も持っていません")
