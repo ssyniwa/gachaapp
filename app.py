@@ -19,9 +19,9 @@ st.title(f"ようこそ、{user_id}さん！ 🎲")
 
 # --- キャラクター定義 ---
 characters = [
-    {"name": "スライム", "rarity": "Normal", "url": "https://example.com/slime.png"},
-    {"name": "勇者", "rarity": "Rare", "url": "https://example.com/hero.png"},
-    {"name": "ドラゴン", "rarity": "Super Rare", "url": "https://example.com/dragon.png"}
+    {"name": "セリナ", "rarity": "Normal", "url": "images/serina.png"},
+    {"name": "ファイアボス", "rarity": "Rare", "url": "images/serina_fireboss.png"},
+    {"name": "アイスボス", "rarity": "Super Rare", "url": "images/serina_iceboss.png"}
 ]
 weights = [0.7, 0.25, 0.05]
 
