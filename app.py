@@ -122,7 +122,7 @@ if st.button("ガチャを引く！"):
     if not user_history.empty:
         already_drawn = any(user_history['date'] == today)
     
-    if already_drawn:
+    if already_drawn == True:
         st.warning("今日のガチャは引き終わりました！")
     else:
         result = random.choices(characters, weights=weights, k=1)[0]
