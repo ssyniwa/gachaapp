@@ -117,7 +117,7 @@ st.title(f"プレイヤー: {user_id} さん")
 # ガチャ処理
 if st.button("ガチャを引く！"):
     today = str(date.today())
-    alredy_drawn = False
+    already_drawn = False
     # 今日のガチャ履歴を確認
     if not user_history.empty:
         if any(user_history['date'] == today):
