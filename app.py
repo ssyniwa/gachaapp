@@ -79,10 +79,10 @@ if not user_history.empty:
         with cols[i % 3]:
             # コンテナのスタイルをCSSで制御
             st.markdown(f"""
-                <div style="border: 3px solid {color}; padding: 10px; border-radius: 10px;">
+                <div style="border: 3px solid {color}; padding: 30px; border-radius: 30px;">
             """, unsafe_allow_html=True)
             
-            st.image(row['url'], width=80) # ここで表示
+            st.image(row['url'], width=300) # ここで表示
             st.write(row['name'])
             
             st.markdown("</div>", unsafe_allow_html=True)
