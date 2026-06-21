@@ -105,9 +105,21 @@ st.title(f"プレイヤー: {user_id} さん")
 
 # ガチャ処理
 if st.button("ガチャを引く！"):
-    result = random.choices(characters, weights=weights, k=1)[0]
-    sheet.append_row([user_id, result['name'], result['rarity'], str(date.today()), result['url'],result['hp'],result['exp'],result['stage']])
-    st.rerun()
+    today = str(date.today())
+    # 今日のガチャ履歴を確認
+    already_drawn = any(user_history['date'] == today)
+    
+    if already_drawn:
+        st.warning("今日のガチャは引き終わりました！")
+    else:
+        result = random.choices(characters, weights=weights, k=1)[0]
+        # 重複チェック：同じキャラ名が既に図鑑にあるか
+        if result['name'] in user_history['name'].values:
+            st.info(f"{result['name']} は既に持っています！")
+        else:
+            sheet.append_row([user_id, result['name'], result['rarity'], today, result['url'], result['hp'], result['exp'], result['stage']])
+            st.success(f"新しい仲間: {result['name']} を引きました！")
+            st.rerun()
 
 st.subheader("コレクション (タップして育成)")
 if not user_history.empty:
