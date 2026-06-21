@@ -80,7 +80,7 @@ if not user_history.empty:
             # 枠線用のdiv開始（HTMLタグ）
             st.markdown(
                 f"""
-                <div style="border: 3px solid {color}; padding: 10px; border-radius: 15px; 
+                <div style="border: 3px solid {color}; padding: 10px; border-radius: 30px; 
                             display: flex; flex-direction: column; align-items: center; background-color: #f9f9f9;">
                 """,
                 unsafe_allow_html=True
