@@ -120,7 +120,8 @@ if st.button("ガチャを引く！"):
     alredy_drawn = False
     # 今日のガチャ履歴を確認
     if not user_history.empty:
-        already_drawn = any(user_history['date'] == today)
+        if any(user_history['date'] == today):
+            already_drawn = True
     
     if already_drawn == True:
         st.warning("今日のガチャは引き終わりました！")
