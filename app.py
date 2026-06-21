@@ -114,21 +114,27 @@ if selected_char_index and selected_char_index.isdigit():
 # 3. ガチャ＆図鑑画面 (メイン画面)
 st.title(f"プレイヤー: {user_id} さん")
 
-# ガチャ処理
+# --- ガチャ処理の修正 ---
 if st.button("ガチャを引く！"):
     today = str(date.today())
-    already_drawn = False
-    # 今日のガチャ履歴を確認
-    if not user_history.empty:
-        if any(user_history['date'] == today):
-            already_drawn = True
     
-    if already_drawn == True:
+    already_drawn = False
+    if not user_history.empty and 'date' in user_history.columns:
+        already_drawn = today in user_history['date'].values
+    
+    if already_drawn:
         st.warning("今日のガチャは引き終わりました！")
     else:
         result = random.choices(characters, weights=weights, k=1)[0]
-        # 重複チェック：同じキャラ名が既に図鑑にあるか
-        if result['name'] in user_history['name'].value:
+        
+        # 重複チェックの修正
+        # 'name'列が正しく存在するか確認
+        if not user_history.empty and 'name' in user_history.columns:
+            is_duplicate = result['name'] in user_history['name'].values
+        else:
+            is_duplicate = False
+            
+        if is_duplicate:
             st.info(f"{result['name']} は既に持っています！")
         else:
             sheet.append_row([user_id, result['name'], result['rarity'], today, result['url'], result['hp'], result['exp'], result['stage']])
