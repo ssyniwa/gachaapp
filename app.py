@@ -77,16 +77,15 @@ if not user_history.empty:
         color = rarity_colors.get(row['rarity'], "black")
         
         with cols[i % 3]:
-            # HTMLで画像にスタイルを適用
-            st.markdown(
-                f"""
-                <div style="border: 3px solid {color}; padding: 5px; border-radius: 10px; text-align: center;">
-                    <img src="{row['url']}" width="300">
-                    <p style="font-size: 10px; margin: 0;">{row['name']}</p>
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
+        # コンテナのスタイルをCSSで制御
+        st.markdown(f"""
+            <div style="border: 3px solid {color}; padding: 10px; border-radius: 10px;">
+        """, unsafe_allow_html=True)
+        
+        st.image(row['url'], width=80) # ここで表示
+        st.write(row['name'])
+        
+        st.markdown("</div>", unsafe_allow_html=True)
 else:
     st.write("まだ何も持っていません")
 
