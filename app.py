@@ -128,7 +128,7 @@ if st.button("ガチャを引く！"):
     else:
         result = random.choices(characters, weights=weights, k=1)[0]
         # 重複チェック：同じキャラ名が既に図鑑にあるか
-        if result['name'] in user_history['name'].values:
+        if result['name'] in user_history['name']:
             st.info(f"{result['name']} は既に持っています！")
         else:
             sheet.append_row([user_id, result['name'], result['rarity'], today, result['url'], result['hp'], result['exp'], result['stage']])
