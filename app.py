@@ -25,14 +25,32 @@ characters = [
 ]
 weights = [0.7, 0.25, 0.05]
 
-# --- データ読み込み ---
+# --- ユーザー認証画面 ---
+query_params = st.query_params
+user_id = query_params.get("user")
+
+if not user_id:
+    st.title("ようこそ！")
+    name_input = st.text_input("プレイヤー名を入力してください")
+    if st.button("ゲーム開始"):
+        if name_input:
+            # URLを更新して再読み込み
+            st.query_params["user"] = name_input
+            st.rerun()
+        else:
+            st.error("名前を入力してください")
+    st.stop() # 名前がない場合はここで処理を止める
+
+# --- ログイン後のゲーム画面 ---
+st.title(f"プレイヤー: {user_id} さん")
+
+# データの読み込み
 data = sheet.get_all_records()
 df = pd.DataFrame(data)
-
-# --- 1日1回制限ロジック ---
-today = str(date.today())
-# 指定ユーザーの今日の記録があるか
 user_history = df[df['user_id'] == user_id] if not df.empty else pd.DataFrame()
+
+# ガチャ処理
+today = str(date.today())
 already_drawn = not user_history.empty and today in user_history['date'].values
 
 if already_drawn:
@@ -44,13 +62,17 @@ else:
         st.success(f"{result['name']} を引きました！")
         st.rerun()
 
-# --- 図鑑表示 ---
-st.subheader("あなたのコレクション")
+# 図鑑表示
+st.subheader("コレクション")
 if not user_history.empty:
-    cols = st.columns(3) # 3列で表示
+    cols = st.columns(3)
     for i, row in user_history.iterrows():
         with cols[i % 3]:
-            st.image(row['image_url'], width=100)
+            st.image(row['url'], width=80)
             st.caption(row['name'])
 else:
     st.write("まだ何も持っていません")
+
+if st.button("別のユーザーで遊ぶ"):
+    st.query_params.clear()
+    st.rerun()
