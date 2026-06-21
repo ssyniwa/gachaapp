@@ -15,7 +15,7 @@ sheet = client.open("Gacha_DB").sheet1
 query_params = st.query_params
 user_id = query_params.get("user", "guest") # 指定がなければguest
 
-st.title(f"ようこそ、{user_id}さん！ 🎲")
+st.title(f"ようこそ、{user_id}さん！ 2属性キャラクターガチャ＆放置育成！")
 
 # --- キャラクター定義 ---
 characters = [
