@@ -16,7 +16,8 @@ sheet = client.open("Gacha_DB").sheet1
 characters = [
     {"name": "アリサ", "rarity": "A", "url": "images/arisa.png","hp": 30,"exp": 0,"stage": 1},
     {"name": "サユリ", "rarity": "S", "url": "images/sayuri.png","hp": 40,"exp": 0,"stage": 1},
-    {"name": "シャリー", "rarity": "S", "url": "images/shally.png","hp": 40,"exp": 0,"stage": 1}
+    {"name": "シャリー", "rarity": "S", "url": "images/shally.png","hp": 40,"exp": 0,"stage": 1},
+    {"name": "セリア", "rarity": "S", "url": "images/seria.png","hp": 40,"exp": 0,"stage": 1}
 ]
 weights = [0.4, 0.3, 0.3]
 # --- クエストのパターン ---
