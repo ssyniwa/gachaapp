@@ -96,6 +96,7 @@ if selected_char_index and selected_char_index.isdigit():
             new_stage = stage
             if new_exp >= 100:
                 new_stage += 1
+                new_hp += 10
                 new_exp = 0
                 st.success("レベルアップ！")
             
