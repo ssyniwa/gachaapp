@@ -15,10 +15,10 @@ sheet = client.open("Gacha_DB").sheet1
 # --- キャラクター定義 ---
 characters = [
     {"name": "アリサ", "rarity": "A", "url": "images/arisa.png","hp": 30,"exp": 0,"stage": 1},
-    {"name": "サユリ", "rarity": "A", "url": "images/sayuri.png","hp": 30,"exp": 0,"stage": 1},
+    {"name": "サユリ", "rarity": "S", "url": "images/sayuri.png","hp": 40,"exp": 0,"stage": 1},
     {"name": "シャリー", "rarity": "S", "url": "images/shally.png","hp": 40,"exp": 0,"stage": 1}
 ]
-weights = [0.4, 0.4, 0.2]
+weights = [0.4, 0.3, 0.3]
 # --- クエストのパターン ---
 # --- クエストプールの定義 ---
 # ステージごとにクエストを分ける
