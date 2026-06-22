@@ -14,9 +14,9 @@ sheet = client.open("Gacha_DB").sheet1
 
 # --- キャラクター定義 ---
 characters = [
-    {"name": "アリサ", "rarity": "A", "url": "images/arisa.png","hp": 100,"exp": 0,"stage": 1},
-    {"name": "サユリ", "rarity": "A", "url": "images/sayuri.png","hp": 100,"exp": 0,"stage": 1},
-    {"name": "シャリー", "rarity": "S", "url": "images/shally.png","hp": 200,"exp": 0,"stage": 1}
+    {"name": "アリサ", "rarity": "A", "url": "images/arisa.png","hp": 30,"exp": 0,"stage": 1},
+    {"name": "サユリ", "rarity": "A", "url": "images/sayuri.png","hp": 30,"exp": 0,"stage": 1},
+    {"name": "シャリー", "rarity": "S", "url": "images/shally.png","hp": 40,"exp": 0,"stage": 1}
 ]
 weights = [0.4, 0.4, 0.2]
 # --- クエストのパターン ---
@@ -68,7 +68,7 @@ if selected_char_index and selected_char_index.isdigit():
     
     # 日付が変わっていたらHP全回復処理
     if last_quest_date != today and int(current_data[5]) == 0: # HPが0の時または日付経過時
-        sheet.update_cell(row_num, 6, 100) # 全回復（キャラの初期HPなど）
+        sheet.update_cell(row_num, 6, 30) # 全回復（キャラの初期HPなど）
         sheet.update_cell(row_num, 4, today) # 日付を更新
         st.info("日付が変わったのでHPが全回復しました！")
         
