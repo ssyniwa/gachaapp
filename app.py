@@ -14,11 +14,11 @@ sheet = client.open("Gacha_DB").sheet1
 
 # --- キャラクター定義 ---
 characters = [
-    {"name": "アリサ", "rarity": "B", "url": "images/arisa.png","hp": 30,"exp": 0,"stage": 1},
-    {"name": "サユリ", "rarity": "A", "url": "images/sayuri.png","hp": 40,"exp": 0,"stage": 1},
-    {"name": "シャリー", "rarity": "S", "url": "images/shally.png","hp": 50,"exp": 0,"stage": 1}
+    {"name": "アリサ", "rarity": "A", "url": "images/arisa.png","hp": 100,"exp": 0,"stage": 1},
+    {"name": "サユリ", "rarity": "A", "url": "images/sayuri.png","hp": 100,"exp": 0,"stage": 1},
+    {"name": "シャリー", "rarity": "S", "url": "images/shally.png","hp": 200,"exp": 0,"stage": 1}
 ]
-weights = [0.7, 0.25, 0.05]
+weights = [0.4, 0.4, 0.2]
 # --- クエストのパターン ---
 quest_scenarios = [
     ("森でスライムと遊んだ", 10, 5),    # (感想, 消費HP, 獲得EXP)
@@ -68,7 +68,7 @@ if selected_char_index and selected_char_index.isdigit():
     
     # 日付が変わっていたらHP全回復処理
     if last_quest_date != today and int(current_data[5]) == 0: # HPが0の時または日付経過時
-        sheet.update_cell(row_num, 6, 50) # 全回復（キャラの初期HPなど）
+        sheet.update_cell(row_num, 6, 100) # 全回復（キャラの初期HPなど）
         sheet.update_cell(row_num, 4, today) # 日付を更新
         st.info("日付が変わったのでHPが全回復しました！")
         
@@ -78,7 +78,7 @@ if selected_char_index and selected_char_index.isdigit():
 
     current_stage = int(current_data[7])
     display_url = get_image_path(current_data[4], current_stage)
-    st.image(display_url, width=200)# URL列
+    st.image(display_url, width=400)# URL列
     st.write(f"キャラ: {name} | HP: {hp} | EXP: {exp} | Stage: {stage}")
     
     # クエスト実行ボタン
@@ -150,6 +150,6 @@ if not user_history.empty:
             st.rerun()
         # 図鑑でもレベルに応じた画像を表示
         display_url = get_image_path(row['url'], row['stage'])
-        st.image(display_url, width=150)
+        st.image(display_url, width=300)
 else:
     st.write("まだ何も持っていません")
