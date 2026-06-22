@@ -20,11 +20,13 @@ characters = [
 ]
 weights = [0.4, 0.4, 0.2]
 # --- クエストのパターン ---
-quest_scenarios = [
-    ("森でスライムと遊んだ", 10, 5),    # (感想, 消費HP, 獲得EXP)
-    ("洞窟で宝箱を見つけた", 20, 15),
-    ("強敵と戦った", 30, 30)
-]
+# --- クエストプールの定義 ---
+# ステージごとにクエストを分ける
+quest_pools = {
+    1: [("森でスライムと遊んだ", 5, 10), ("川で魚を捕まえた", 8, 15)],
+    2: [("洞窟で宝箱を見つけた", 15, 25), ("迷いの森を抜けた", 20, 30)],
+    3: [("古の遺跡を探索した", 25, 40), ("伝説の火種を見つけた", 30, 50)]
+}
 # --- クエリパラメータ取得 ---
 query_params = st.query_params
 user_id = query_params.get("user")
@@ -35,6 +37,9 @@ def get_image_path(base_url, stage):
     # 例: images/serina_lv1.png
     base = base_url.rsplit('.', 1)[0] # 拡張子を除去
     return f"{base}_lv{stage}.png"
+# ステージが高すぎる場合は、最大レベルのプールを参照する工夫
+def get_quest_for_stage(stage):
+    return quest_pools.get(stage, quest_pools[3])
 # 1. ログイン処理
 if not user_id:
     st.title("ログイン")
@@ -87,9 +92,10 @@ if selected_char_index and selected_char_index.isdigit():
             st.error("体力がありません！")
         else:
             # 報酬計算（例）
-            hp_lost = random.randint(5, 15)
-            exp_gain = random.randint(10, 20)
-            new_hp = max(0, hp - hp_lost)
+            # 1. ステージに応じたクエストをランダム選択
+            current_pool = get_quest_for_stage(stage)
+            scenario, hp_cost, exp_gain = random.choice(current_pool)
+            new_hp = max(0, hp - hp_cost)
             new_exp = exp + exp_gain
             
             # 進化判定
@@ -98,14 +104,17 @@ if selected_char_index and selected_char_index.isdigit():
                 new_stage += 1
                 new_hp += 10
                 new_exp = 0
-                st.success("レベルアップ！")
+                st.balloons()
+                st.success(f"おめでとう！ステージ{new_stage}に進化しました！")
             
             # スプレッドシートを更新 (HP, EXP, Stage列を更新)
             sheet.update_cell(row_num, 6, new_hp)   # HP列
             sheet.update_cell(row_num, 7, new_exp)  # EXP列
             sheet.update_cell(row_num, 8, new_stage)# Stage列
-            
-            st.rerun() # 画面を更新して新しい数値を反映
+            sheet.update_cell(row_num, 9, scenario)   # 新設: last_quest_txt列
+            # 5. 結果表示
+            st.write(f"クエスト結果: {scenario}")
+            st.rerun()
     
     if st.button("戻る"):
         st.query_params.pop("select")
