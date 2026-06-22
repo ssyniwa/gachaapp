@@ -129,7 +129,7 @@ if selected_char_index and selected_char_index.isdigit():
     st.stop()
 
 # 3. ガチャ＆図鑑画面 (メイン画面)
-st.title(f"プレイヤー: {user_id} さん")
+st.title(f"ようこそ。プレイヤー: {user_id} さん。1日1回ガチャを引ける、ガチャ＆育成ゲーム初期バージョン")
 
 # --- ガチャ処理の修正 ---
 if st.button("ガチャを引く！"):
