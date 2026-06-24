@@ -27,9 +27,9 @@ characters = [
     {"name": "シズク", "rarity": "A", "url": "images/sizuku.png","hp": 30,"exp": 0,"stage": 1},
     {"name": "ベル", "rarity": "A", "url": "images/beru.png","hp": 30,"exp": 0,"stage": 1},
     {"name": "イヴ", "rarity": "A", "url": "images/ibu.png","hp": 30,"exp": 0,"stage": 1},
-    {"name": "セラフィナ", "rarity": "SS", "url": "images/serafina.png","hp": 50,"exp": 0,"stage": 1}
+    {"name": "セラフィナ", "rarity": "A", "url": "images/serafina.png","hp": 50,"exp": 0,"stage": 1}
 ]
-weights = [0.1, 0.1, 0.1, 0.1, 0.15, 0.15, 0.15]
+weights = [0.05, 0.05, 0.05, 0.05, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08]
 # --- クエストのパターン ---
 # --- クエストプールの定義 ---
 # ステージごとにクエストを分ける
