@@ -21,7 +21,13 @@ characters = [
     {"name": "ミオ", "rarity": "A", "url": "images/mio.png","hp": 30,"exp": 0,"stage": 1},
     {"name": "ノア", "rarity": "A", "url": "images/noa.png","hp": 30,"exp": 0,"stage": 1},
     {"name": "ヴィオラ", "rarity": "A", "url": "images/viora.png","hp": 30,"exp": 0,"stage": 1},
-    {"name": "イリス", "rarity": "A", "url": "images/iris.png","hp": 30,"exp": 0,"stage": 1}
+    {"name": "イリス", "rarity": "A", "url": "images/iris.png","hp": 30,"exp": 0,"stage": 1},
+    {"name": "ルナ", "rarity": "A", "url": "images/runa.png","hp": 30,"exp": 0,"stage": 1},
+    {"name": "メイ", "rarity": "A", "url": "images/mei.png","hp": 30,"exp": 0,"stage": 1},
+    {"name": "シズク", "rarity": "A", "url": "images/sizuku.png","hp": 30,"exp": 0,"stage": 1},
+    {"name": "ベル", "rarity": "A", "url": "images/beru.png","hp": 30,"exp": 0,"stage": 1},
+    {"name": "イヴ", "rarity": "A", "url": "images/ibu.png","hp": 30,"exp": 0,"stage": 1},
+    {"name": "セラフィナ", "rarity": "SS", "url": "images/serafina.png","hp": 50,"exp": 0,"stage": 1}
 ]
 weights = [0.1, 0.1, 0.1, 0.1, 0.15, 0.15, 0.15]
 # --- クエストのパターン ---
