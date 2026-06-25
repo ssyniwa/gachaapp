@@ -31,9 +31,11 @@ characters = [
     {"name": "ルージュ", "rarity": "SS", "url": "images/ruge.png","hp": 50,"exp": 0,"stage": 1},
     {"name": "ナジャ", "rarity": "SS", "url": "images/naja.png","hp": 50,"exp": 0,"stage": 1},
     {"name": "イグニス", "rarity": "SS", "url": "images/igunis.png","hp": 50,"exp": 0,"stage": 1},
-    {"name": "ウィンディア", "rarity": "SS", "url": "images/windia.png","hp": 50,"exp": 0,"stage": 1}
+    {"name": "ウィンディア", "rarity": "SS", "url": "images/windia.png","hp": 50,"exp": 0,"stage": 1},
+    {"name": "ヴァルゼア", "rarity": "SS", "url": "images/valzea.png","hp": 50,"exp": 0,"stage": 1},
+    {"name": "オニキス", "rarity": "SS", "url": "images/onikis.png","hp": 50,"exp": 0,"stage": 1}
 ]
-weights = [0.035, 0.035, 0.035, 0.035, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.01, 0.01, 0.01, 0.01, 0.01]
+weights = [0.03, 0.03, 0.03, 0.03, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
 # --- クエストのパターン ---
 # --- クエストプールの定義 ---
 # ステージごとにクエストを分ける
