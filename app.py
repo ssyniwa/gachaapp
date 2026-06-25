@@ -29,7 +29,8 @@ characters = [
     {"name": "イヴ", "rarity": "A", "url": "images/ibu.png","hp": 30,"exp": 0,"stage": 1},
     {"name": "セラフィナ", "rarity": "A", "url": "images/serafina.png","hp": 30,"exp": 0,"stage": 1},
     {"name": "ルージュ", "rarity": "A", "url": "images/ruge.png","hp": 30,"exp": 0,"stage": 1},
-    {"name": "ナジャ", "rarity": "A", "url": "images/naja.png","hp": 30,"exp": 0,"stage": 1}
+    {"name": "ナジャ", "rarity": "A", "url": "images/naja.png","hp": 30,"exp": 0,"stage": 1},
+    {"name": "イグニス", "rarity": "A", "url": "images/igunis.png","hp": 30,"exp": 0,"stage": 1}
 ]
 weights = [0.1, 0.1, 0.1, 0.1, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
 # --- クエストのパターン ---
