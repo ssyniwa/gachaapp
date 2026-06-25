@@ -27,13 +27,13 @@ characters = [
     {"name": "シズク", "rarity": "A", "url": "images/sizuku.png","hp": 30,"exp": 0,"stage": 1},
     {"name": "ベル", "rarity": "A", "url": "images/beru.png","hp": 30,"exp": 0,"stage": 1},
     {"name": "イヴ", "rarity": "A", "url": "images/ibu.png","hp": 30,"exp": 0,"stage": 1},
-    {"name": "セラフィナ", "rarity": "A", "url": "images/serafina.png","hp": 30,"exp": 0,"stage": 1},
-    {"name": "ルージュ", "rarity": "A", "url": "images/ruge.png","hp": 30,"exp": 0,"stage": 1},
-    {"name": "ナジャ", "rarity": "A", "url": "images/naja.png","hp": 30,"exp": 0,"stage": 1},
-    {"name": "イグニス", "rarity": "A", "url": "images/igunis.png","hp": 30,"exp": 0,"stage": 1},
-    {"name": "ウィンディア", "rarity": "A", "url": "images/windia.png","hp": 30,"exp": 0,"stage": 1}
+    {"name": "セラフィナ", "rarity": "SS", "url": "images/serafina.png","hp": 50,"exp": 0,"stage": 1},
+    {"name": "ルージュ", "rarity": "SS", "url": "images/ruge.png","hp": 50,"exp": 0,"stage": 1},
+    {"name": "ナジャ", "rarity": "SS", "url": "images/naja.png","hp": 50,"exp": 0,"stage": 1},
+    {"name": "イグニス", "rarity": "SS", "url": "images/igunis.png","hp": 50,"exp": 0,"stage": 1},
+    {"name": "ウィンディア", "rarity": "SS", "url": "images/windia.png","hp": 50,"exp": 0,"stage": 1}
 ]
-weights = [0.1, 0.1, 0.1, 0.1, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
+weights = [0.035, 0.035, 0.035, 0.035, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.01, 0.01, 0.01, 0.01, 0.01]
 # --- クエストのパターン ---
 # --- クエストプールの定義 ---
 # ステージごとにクエストを分ける
